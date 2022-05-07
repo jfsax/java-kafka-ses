@@ -33,8 +33,6 @@ public class SESSender {
         try {
             send("example@gmail.com", "example@gmail.com", "Testing 123", bodyText, bodyHTML);
 
-            Client.getSESClient().close();
-
             System.out.println("Email sent.");
         } catch (IOException e) {
             e.getStackTrace();
@@ -84,7 +82,7 @@ public class SESSender {
                     .build();
 
             Client.getSESClient().sendRawEmail(rawEmailRequest);
-
+            Client.getSESClient().close();
         } catch (SesException e) {
             System.err.println(e.awsErrorDetails().errorMessage());
         }
