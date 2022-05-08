@@ -16,7 +16,6 @@ public class MessageBuilder {
     public static MimeMessage createMessage(String sender,
             String recipient,
             String subject,
-            String bodyText,
             String bodyHTML) throws AddressException, MessagingException, IOException {
 
         Session session = Session.getDefaultInstance(new Properties());
@@ -26,14 +25,10 @@ public class MessageBuilder {
         message.setFrom(new InternetAddress(sender));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
 
-        MimeBodyPart textPart = new MimeBodyPart();
-        textPart.setContent(bodyText, "text/plain; charset=UTF-8");
-
         MimeBodyPart htmlPart = new MimeBodyPart();
         htmlPart.setContent(bodyHTML, "text/html; charset=UTF-8");
 
         MimeMultipart msgBody = new MimeMultipart();
-        msgBody.addBodyPart(textPart);
         msgBody.addBodyPart(htmlPart);
 
         message.setContent(msgBody);

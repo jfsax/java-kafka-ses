@@ -26,10 +26,9 @@ public class SESSender {
                 + "</html>";
 
         try {
-            MimeMessage mimeMessage = MessageBuilder.createMessage("example@gmail.com",
-                    "example@gmail.com",
+            MimeMessage mimeMessage = MessageBuilder.createMessage("EXAMPLE@gmail.com",
+                    "EXAMPLE@gmail.com",
                     subject,
-                    message,
                     bodyHTML);
 
             sendToSES(mimeMessage);

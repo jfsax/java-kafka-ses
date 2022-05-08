@@ -12,6 +12,7 @@ import com.jazz.kafkases.services.aws.SESSender;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
@@ -21,12 +22,12 @@ public class KafkaService {
         consumer.subscribe(Collections.singletonList(System.getenv("KAFKA_TOPIC")));
 
         while (true) {
-            var records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("------------------------------------------");
-                System.out.println("Partition: " + record.partition());
-                System.out.println("offset: " + record.offset());
+                System.out.println(record);
+                System.out.println("------------------------------------------");
 
                 try {
                     SESSender.sendMessage(record.key(), record.value());
@@ -38,8 +39,6 @@ public class KafkaService {
                     e.printStackTrace();
                 }
 
-                System.out.println(record.key() + ": " + record.value());
-
                 System.out.println("Message processed.");
                 System.out.println("------------------------------------------");
             }
@@ -47,7 +46,7 @@ public class KafkaService {
     }
 
     private static Properties properties(String groupId) {
-        Properties properties = new Properties();
+        var properties = new Properties();
 
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, System.getenv("KAFKA_HOST"));
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
