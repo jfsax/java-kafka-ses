@@ -19,19 +19,20 @@ import software.amazon.awssdk.services.ses.model.RawMessage;
 import software.amazon.awssdk.services.ses.model.SesException;
 
 public class SESSender {
-    public static void sendMessage(String message) throws AddressException, MessagingException {
-        String bodyText = "EMAIL BY PRODUCER";
-
+    public static void sendMessage(String subject, String message) throws AddressException, MessagingException {
         String bodyHTML = "<html>"
                 + "<head></head>"
                 + "<body>"
-                + "<h1>TEST</h1>"
-                + "<p>SENT BY KAFKA-JAVA-PRODUCER</p>"
+                + "<h1>" + subject + "</h1>"
+                + "<p>" + message + "</p>"
                 + "</body>"
                 + "</html>";
 
         try {
-            send("example@gmail.com", "example@gmail.com", "Testing 123", bodyText, bodyHTML);
+            MimeMessage mimeMessage = createMessage("example@gmail.com", "example@gmail.com", subject, message,
+                    bodyHTML);
+
+            sendToSES(mimeMessage);
 
             System.out.println("Email sent.");
         } catch (IOException e) {
@@ -39,7 +40,7 @@ public class SESSender {
         }
     }
 
-    public static void send(String sender,
+    public static MimeMessage createMessage(String sender,
             String recipient,
             String subject,
             String bodyText,
@@ -64,6 +65,10 @@ public class SESSender {
 
         message.setContent(msgBody);
 
+        return message;
+    }
+
+    public static void sendToSES(MimeMessage message) {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             message.writeTo(outputStream);
@@ -73,6 +78,7 @@ public class SESSender {
             buf.get(arr);
 
             SdkBytes data = SdkBytes.fromByteArray(arr);
+
             RawMessage rawMessage = RawMessage.builder()
                     .data(data)
                     .build();
@@ -85,6 +91,10 @@ public class SESSender {
             Client.getSESClient().close();
         } catch (SesException e) {
             System.err.println(e.awsErrorDetails().errorMessage());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        } catch (MessagingException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

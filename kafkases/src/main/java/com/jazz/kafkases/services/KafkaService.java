@@ -5,6 +5,11 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
+import com.jazz.kafkases.services.aws.SESSender;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -18,12 +23,22 @@ public class KafkaService {
         while (true) {
             var records = consumer.poll(Duration.ofMillis(100));
 
-            for (ConsumerRecord<String, String> registro : records) {
+            for (ConsumerRecord<String, String> record : records) {
                 System.out.println("------------------------------------------");
-                System.out.println("Partition: " + registro.partition());
-                System.out.println("offset: " + registro.offset());
+                System.out.println("Partition: " + record.partition());
+                System.out.println("offset: " + record.offset());
 
-                System.out.println(registro.key() + ": " + registro.value());
+                try {
+                    SESSender.sendMessage(record.key(), record.value());
+                } catch (AddressException e) {
+                    System.out.println(e.getMessage() + "Insert a valid address.");
+                    e.printStackTrace();
+                } catch (MessagingException e) {
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+
+                System.out.println(record.key() + ": " + record.value());
 
                 System.out.println("Message processed.");
                 System.out.println("------------------------------------------");
