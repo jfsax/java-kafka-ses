@@ -14,6 +14,8 @@ KAFKA_TOPIC="TOPIC_NAME"
 KAFKA_HOST="YOUR_IP:9092"
 ```
 
+- change the message `sender` and the `recipient`
+
 ## running the project
 - go to the root directory
 ```
