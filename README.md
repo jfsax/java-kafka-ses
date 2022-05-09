@@ -3,7 +3,7 @@
 ## requirements
 - <a href="https://www.oracle.com/java/technologies/downloads/">java</a>
 - <a href="https://maven.apache.org/download.cgi">maven</a>
-- <a href="https://github.com/jfsax/kafka-basics">kafka</a>
+- <a href="https://github.com/jfsax/kafka-basics">kafka producer</a>
 
 ## before running the project
 - set the following environment variables:
