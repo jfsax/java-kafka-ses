@@ -1,11 +1,9 @@
 # java-kafka-ses
 
 ## requirements
-- java
-- maven
-- kafka
-
-instrunctions on how to setup, run and send/consume messages in Kafka: https://github.com/jfsax/kafka-basics
+- <a href="https://www.oracle.com/java/technologies/downloads/">java</a>
+- <a href="https://maven.apache.org/download.cgi">maven</a>
+- <a href="https://github.com/jfsax/kafka-basics">kafka</a>
 
 ## before running the project
 - set the following environment variables:
