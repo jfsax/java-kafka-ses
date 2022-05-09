@@ -13,7 +13,7 @@ instrunctions on how to setup, run and send/consume messages in Kafka: https://g
 AWS_ACCESS_KEY="YOUR_AWS_ACCESS_KEY"
 AWS_SECRET_KEY="YOUR_AWS_SECRET_KEY"
 KAFKA_TOPIC="TOPIC_NAME"
-KAFKA_HOST="IP:9092"
+KAFKA_HOST="YOUR_IP:9092"
 ```
 
 ## running the project
