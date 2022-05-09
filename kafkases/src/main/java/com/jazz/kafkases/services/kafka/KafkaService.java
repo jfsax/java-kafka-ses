@@ -1,4 +1,4 @@
-package com.jazz.kafkases.services;
+package com.jazz.kafkases.services.kafka;
 
 import java.time.Duration;
 import java.util.Collections;
