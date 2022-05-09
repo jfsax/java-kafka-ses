@@ -1,6 +1,11 @@
 # java-kafka-ses
 
-instrunctions on how to setup, run and send/consume messages in Kafka: https://github.com/jfsax/kafka-basics
+## requirements
+- java
+- maven
+- kafka
+
+`instrunctions on how to setup, run and send/consume messages in Kafka: https://github.com/jfsax/kafka-basics`
 
 ## before running the project
 - set the following environment variables:
@@ -13,10 +18,16 @@ KAFKA_HOST="IP:9092"
 
 ## running the project
 - go to the root directory
-```cd kafkases```
+```
+cd kafkases
+```
 
 - generate jar file:
-```./build.sh```
+```
+./build.sh
+```
 
 - run:
-```./start.sh```
+```
+./start.sh
+```
