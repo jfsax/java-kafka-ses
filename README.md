@@ -5,7 +5,7 @@
 - maven
 - kafka
 
-`instrunctions on how to setup, run and send/consume messages in Kafka: https://github.com/jfsax/kafka-basics`
+instrunctions on how to setup, run and send/consume messages in Kafka: https://github.com/jfsax/kafka-basics
 
 ## before running the project
 - set the following environment variables:
