@@ -27,7 +27,6 @@ public class KafkaService {
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("------------------------------------------");
                 System.out.println(record);
-                System.out.println("------------------------------------------");
 
                 try {
                     SESSender.sendMessage(record.key(), record.value());
