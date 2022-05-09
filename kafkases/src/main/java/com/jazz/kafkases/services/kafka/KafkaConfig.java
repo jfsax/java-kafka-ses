@@ -7,7 +7,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class KafkaConfig {
     public static Properties getProperties(String groupId) {
-        var properties = new Properties();
+        Properties properties = new Properties();
 
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, System.getenv("KAFKA_HOST"));
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
