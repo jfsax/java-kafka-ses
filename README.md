@@ -19,7 +19,7 @@ KAFKA_HOST="IP:9092"
 ## running the project
 - go to the root directory
 ```
-cd kafkases
+cd java-kafka-ses/kafkases
 ```
 
 - generate jar file:
